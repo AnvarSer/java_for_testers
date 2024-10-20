@@ -83,4 +83,18 @@ public class TriangleTests {
         Assertions.assertEquals(25.0, new Triangle(7, 8, 10).trianglePerimeter());
     }
 
+    @Test
+    void testEquality(){
+        var t1 = new Triangle(3.0, 4.0, 5.0);
+        var t2 = new Triangle(3.0, 4.0, 5.0);
+        Assertions.assertTrue(t1.equals(t2));
+    }
+
+    @Test
+    void testEquality2(){
+        var t1 = new Triangle(3.0, 4.0, 5.0);
+        var t2 = new Triangle(4.0, 5.0, 3.0);
+        Assertions.assertTrue(t1.equals(t2));
+    }
+
 }
