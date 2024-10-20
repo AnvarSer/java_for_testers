@@ -6,6 +6,54 @@ import org.junit.jupiter.api.Test;
 public class TriangleTests {
 
     @Test
+    void cannotCreateTriangleWithNegativeSide() {
+        try {
+            new Triangle(-5.0, 3.0, 8.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            exception.printStackTrace();
+        }
+
+        try {
+            new Triangle (5.0, -3.0, 8.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            exception.printStackTrace();
+        }
+
+        try {
+            new Triangle (5.0, 3.0, -8.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    @Test
+    void cannotCreateTriangleWhenTriangleSideInequalityViolation () {
+        try {
+            new Triangle(1.0, 2.0, 10.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            exception.printStackTrace();
+        }
+
+        try {
+            new Triangle(4.0, 15.0, 10.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            exception.printStackTrace();
+        }
+
+        try {
+            new Triangle(3.0, 7.0, 2.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    @Test
     void canCalculateTriangleArea(){
         Assertions.assertEquals(14.7, new Triangle(5.0, 6.0, 7.0 ).triangleArea(), 0.01);
     }

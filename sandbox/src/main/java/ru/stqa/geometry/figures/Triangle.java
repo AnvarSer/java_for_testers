@@ -1,14 +1,15 @@
 package ru.stqa.geometry.figures;
 
-public class Triangle {
-    private double a;
-    private double b;
-    private double c;
+public record Triangle (
+        double a,
+        double b,
+        double c)
+{
 
-    public Triangle(double a, double b, double c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
+    public Triangle {
+        if (a < 0 || b < 0 || c < 0 || a + b < c || a + c < b || b + c < a) {
+            throw new IllegalArgumentException("Not possible to create a triangle with such sides. Also all triangle sides should be non-negative.");
+        }
     }
 
     public static void printTriangleArea(Triangle triangle) {
