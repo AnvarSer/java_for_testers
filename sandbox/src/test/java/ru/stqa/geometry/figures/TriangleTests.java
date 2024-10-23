@@ -91,10 +91,10 @@ public class TriangleTests {
     }
 
     @Test
-    void testEquality2(){
+    void testNonEquality(){
         var t1 = new Triangle(3.0, 4.0, 5.0);
-        var t2 = new Triangle(4.0, 5.0, 3.0);
-        Assertions.assertTrue(t1.equals(t2));
+        var t2 = new Triangle(3.0, 4.0, 3.0);
+        Assertions.assertFalse(t1.equals(t2));
     }
 
 }
