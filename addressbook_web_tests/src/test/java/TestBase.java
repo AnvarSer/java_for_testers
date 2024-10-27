@@ -15,6 +15,12 @@ public class TestBase {
         driver.findElement(By.linkText("group page")).click();
     }
 
+    protected static void removeContact() {
+        driver.findElement(By.name("selected[]")).click();
+        driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
+        driver.findElement(By.linkText("home")).click();
+    }
+
     @BeforeEach
     public void setUp() {
         if (driver == null) {
@@ -54,6 +60,26 @@ public class TestBase {
     }
 
     protected boolean isGroupPresent() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    protected void createContact(String name, String last_name) {
+        driver.findElement(By.linkText("add new")).click();
+        driver.findElement(By.name("firstname")).click();
+        driver.findElement(By.name("firstname")).sendKeys(name);
+        driver.findElement(By.name("lastname")).click();
+        driver.findElement(By.name("lastname")).sendKeys(last_name);
+        driver.findElement(By.xpath("(//input[@name=\'submit\'])[2]")).click();
+        driver.findElement(By.linkText("home page")).click();
+    }
+
+    protected void openContactsPage() {
+        if (!isElementPresent(By.linkText("add new"))) {
+            driver.findElement(By.linkText("add new")).click();
+        }
+    }
+
+    protected boolean isContactPresent() {
         return isElementPresent(By.name("selected[]"));
     }
 }
