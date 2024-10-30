@@ -10,7 +10,7 @@ public class LoginHelper extends HelperBase {
 
     void login(String user, String password) {
         type(By.name("user"), user);
-        type(By.name("pass"), user);
+        type(By.name("pass"), password);
         click(By.xpath("//input[@value=\'Login\']"));
     }
 }
