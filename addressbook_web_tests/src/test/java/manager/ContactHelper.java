@@ -11,7 +11,7 @@ public class ContactHelper extends HelperBase {
 
     public void openContactsPage() {
         if (!manager.isElementPresent(By.linkText("add new"))) {
-            manager.driver.findElement(By.linkText("add new")).click();
+            initContactCreation();
         }
     }
 
@@ -22,16 +22,16 @@ public class ContactHelper extends HelperBase {
 
     public void createContact(ContactData contact) {
         openContactsPage();
-        manager.driver.findElement(By.linkText("add new")).click();
+        initContactCreation();
         fillContactForm(contact);
-        manager.driver.findElement(By.xpath("(//input[@name=\'submit\'])[2]")).click();
+        submitContactCreation();
         returnToContactsPage();
     }
 
     public void removeContact() {
         openContactsPage();
-        manager.driver.findElement(By.name("selected[]")).click();
-        manager.driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
+        selectContact();
+        removeSelectedContact();
         returnToContactsPage();
     }
 
@@ -43,29 +43,41 @@ public class ContactHelper extends HelperBase {
         returnToContactsPage();
     }
 
+    private void submitContactCreation() {
+        click(By.xpath("(//input[@name=\'submit\'])[2]"));
+    }
+
+    private void initContactCreation() {
+        click(By.linkText("add new"));
+    }
+
+    private void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    private void removeSelectedContact() {
+        click(By.xpath("//input[@value=\'Delete\']"));
+    }
+
     private void returnToContactsPage() {
-        manager.driver.findElement(By.linkText("home")).click();
+        click(By.linkText("home"));
     }
 
     private void submitContactModification() {
-        manager.driver.findElement(By.xpath("(//input[@name=\'update\'])[2]")).click();
+        click(By.xpath("(//input[@name=\'update\'])[2]"));
     }
 
     private void fillContactForm(ContactData contact) {
-        manager.driver.findElement(By.name("firstname")).click();
-        manager.driver.findElement(By.name("firstname")).sendKeys(contact.name());
-        manager.driver.findElement(By.name("lastname")).click();
-        manager.driver.findElement(By.name("lastname")).sendKeys(contact.last_name());
-        manager.driver.findElement(By.name("address")).click();
-        manager.driver.findElement(By.name("address")).sendKeys(contact.address());
-        manager.driver.findElement(By.name("email")).click();
-        manager.driver.findElement(By.name("email")).sendKeys(contact.email());
-        manager.driver.findElement(By.name("mobile")).click();
-        manager.driver.findElement(By.name("mobile")).sendKeys(contact.mobile());
+        type(By.name("firstname"), contact.name());
+        type(By.name("lastname"), contact.last_name());
+        type(By.name("address"), contact.address());
+        type(By.name("email"), contact.email());
+        type(By.name("mobile"), contact.mobile());
     }
 
     private void selectInitContactModification() {
-        manager.driver.findElement(By.xpath("//img[@alt=\'Edit\']")).click();
+        click(By.xpath("//img[@alt=\'Edit\']"));
     }
+
 }
 
