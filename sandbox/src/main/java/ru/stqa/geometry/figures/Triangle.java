@@ -37,61 +37,6 @@ public record Triangle(
         if (o == null || getClass() != o.getClass()) return false;
         Triangle triangle = (Triangle) o;
 
-        double minTriangle1, midTriangle1, maxTriangle1;
-
-        if (a <= b && a <= c) {
-            minTriangle1 = a;
-        } else if (b <= a && b <= c) {
-            minTriangle1 = b;
-        } else {
-            minTriangle1 = c;
-        }
-
-        if (a >= b && a >= c) {
-            maxTriangle1 = a;
-        } else if (b >= a && b >= c) {
-            maxTriangle1 = b;
-        } else {
-            maxTriangle1 = c;
-        }
-
-        if ((a != minTriangle1) && (a != maxTriangle1)) {
-            midTriangle1 = a;
-        } else if ((b != minTriangle1) && (b != maxTriangle1)) {
-            midTriangle1 = b;
-        } else {
-            midTriangle1 = c;
-        }
-
-        double minTriangle2, midTriangle2, maxTriangle2;
-
-        if (triangle.a <= triangle.b && triangle.a <= triangle.c) {
-            minTriangle2 = triangle.a;
-        } else if (triangle.b <= triangle.a && triangle.b <= triangle.c) {
-            minTriangle2 = triangle.b;
-        } else {
-            minTriangle2 = triangle.c;
-        }
-
-        if (triangle.a >= triangle.b && triangle.a >= triangle.c) {
-            maxTriangle2 = triangle.a;
-        } else if (triangle.b >= triangle.a && triangle.b >= triangle.c) {
-            maxTriangle2 = triangle.b;
-        } else {
-            maxTriangle2 = triangle.c;
-        }
-
-        if ((triangle.a != minTriangle2) && (triangle.a != maxTriangle2)) {
-            midTriangle2 = triangle.a;
-        } else if ((triangle.b != minTriangle2) && (triangle.b != maxTriangle2)) {
-            midTriangle2 = triangle.b;
-        } else {
-            midTriangle2 = triangle.c;
-        }
-
-        return Double.compare(minTriangle1, minTriangle2) == 0 && Double.compare(midTriangle1, midTriangle2) == 0 && Double.compare(maxTriangle1, maxTriangle2) == 0;
-    }
-
 //        return (Double.compare(triangle.a, this.a) == 0 && Double.compare(triangle.b, this.b) == 0 && Double.compare(triangle.c, this.c) == 0)
 //                || (Double.compare(triangle.a, this.a) == 0 && Double.compare(triangle.b, this.c) == 0 && Double.compare(triangle.c, this.a) == 0)
 //                || (Double.compare(triangle.a, this.b) == 0 && Double.compare(triangle.b, this.c) == 0 && Double.compare(triangle.c, this.a) == 0)
@@ -100,7 +45,15 @@ public record Triangle(
 //                || (Double.compare(triangle.a, this.c) == 0 && Double.compare(triangle.b, this.b) == 0 && Double.compare(triangle.c, this.a) == 0);
 //    }
 
-        @Override
+        return (Double.compare(this.a, triangle.a) == 0 && Double.compare(this.b, triangle.b) == 0 && Double.compare(this.c, triangle.c) == 0) ||
+                (Double.compare(this.a, triangle.b) == 0 && Double.compare(this.b, triangle.c) == 0 && Double.compare(this.c, triangle.a) == 0) ||
+                (Double.compare(this.a, triangle.c) == 0 && Double.compare(this.b, triangle.a) == 0 && Double.compare(this.c, triangle.b) == 0) ||
+                (Double.compare(this.a, triangle.b) == 0 && Double.compare(this.b, triangle.a) == 0 && Double.compare(this.c, triangle.c) == 0) ||
+                (Double.compare(this.a, triangle.c) == 0 && Double.compare(this.b, triangle.b) == 0 && Double.compare(this.c, triangle.a) == 0) ||
+                (Double.compare(this.a, triangle.a) == 0 && Double.compare(this.b, triangle.c) == 0 && Double.compare(this.c, triangle.b) == 0);
+    }
+
+    @Override
         public int hashCode () {
             return 1;
         }
