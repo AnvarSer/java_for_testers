@@ -7,11 +7,9 @@ public class ContactRemovalTests extends TestBase {
 
     @Test
     public void canRemoveContact() {
-        app.openContactsPage();
-        if (!app.isContactPresent()) {
-            app.createContact(new ContactData("Anvar", "Serojitdinov", "167 Church street", "grande@yopmail.com", "6475996758"));
+        if (!app.contacts().isContactPresent()) {
+            app.contacts().createContact(new ContactData("Anvar", "Serojitdinov", "167 Church street", "grande@yopmail.com", "6475996758"));
         }
-
-        app.removeContact();
+        app.contacts().removeContact();
     }
 }
