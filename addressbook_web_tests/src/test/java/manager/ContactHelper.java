@@ -23,6 +23,35 @@ public class ContactHelper extends HelperBase {
     public void createContact(ContactData contact) {
         openContactsPage();
         manager.driver.findElement(By.linkText("add new")).click();
+        fillContactForm(contact);
+        manager.driver.findElement(By.xpath("(//input[@name=\'submit\'])[2]")).click();
+        returnToContactsPage();
+    }
+
+    public void removeContact() {
+        openContactsPage();
+        manager.driver.findElement(By.name("selected[]")).click();
+        manager.driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
+        returnToContactsPage();
+    }
+
+    public void modifyContact(ContactData modifiedContact) {
+        openContactsPage();
+        selectInitContactModification();
+        fillContactForm(modifiedContact);
+        submitContactModification();
+        returnToContactsPage();
+    }
+
+    private void returnToContactsPage() {
+        manager.driver.findElement(By.linkText("home")).click();
+    }
+
+    private void submitContactModification() {
+        manager.driver.findElement(By.xpath("(//input[@name=\'update\'])[2]")).click();
+    }
+
+    private void fillContactForm(ContactData contact) {
         manager.driver.findElement(By.name("firstname")).click();
         manager.driver.findElement(By.name("firstname")).sendKeys(contact.name());
         manager.driver.findElement(By.name("lastname")).click();
@@ -33,14 +62,10 @@ public class ContactHelper extends HelperBase {
         manager.driver.findElement(By.name("email")).sendKeys(contact.email());
         manager.driver.findElement(By.name("mobile")).click();
         manager.driver.findElement(By.name("mobile")).sendKeys(contact.mobile());
-        manager.driver.findElement(By.xpath("(//input[@name=\'submit\'])[2]")).click();
-        manager.driver.findElement(By.linkText("home page")).click();
     }
 
-    public void removeContact() {
-        openContactsPage();
-        manager.driver.findElement(By.name("selected[]")).click();
-        manager.driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
-        manager.driver.findElement(By.linkText("home")).click();
+    private void selectInitContactModification() {
+        manager.driver.findElement(By.xpath("//img[@alt=\'Edit\']")).click();
     }
 }
+
