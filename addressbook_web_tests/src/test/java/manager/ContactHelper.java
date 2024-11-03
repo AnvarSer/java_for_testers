@@ -14,12 +14,7 @@ public class ContactHelper extends HelperBase {
             initContactCreation();
         }
     }
-
-    public boolean isContactPresent() {
-        openContactsPage();
-        return manager.isElementPresent(By.name("selected[]"));
-    }
-
+    
     public void createContact(ContactData contact) {
         openContactsPage();
         initContactCreation();
@@ -79,5 +74,9 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//img[@alt=\'Edit\']"));
     }
 
+    public int getCount() {
+        openContactsPage();
+        return manager.driver.findElements(By.name("selected[]")).size();
+    }
 }
 
