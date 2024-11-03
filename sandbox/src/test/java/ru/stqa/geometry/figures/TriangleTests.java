@@ -114,4 +114,11 @@ public class TriangleTests {
         Assertions.assertTrue(t1.equals(t2));
     }
 
+    @Test
+    void testEquality1attempt(){
+        var t1 = new Triangle(3.0, 5.0, 4.0);
+        var t2 = new Triangle(3.0, 4.0, 3.0);
+        Assertions.assertTrue(t1.equals(t2));
+    }
+
 }
