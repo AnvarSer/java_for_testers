@@ -3,6 +3,7 @@ package manager;
 import model.GroupData;
 import org.openqa.selenium.By;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +34,9 @@ public class GroupHelper extends HelperBase{
         returnToGroupsPage();
     }
 
-    public void modifyGroup(GroupData modifiedGroup) {
+    public void modifyGroup(GroupData group, GroupData modifiedGroup) {
         openGroupsPage();
-        selectGroup(null);
+        selectGroup(group);
         initGroupModification();
         fillGroupForm(modifiedGroup);
         submitGroupModification();
@@ -95,6 +96,7 @@ public class GroupHelper extends HelperBase{
     }
 
     public List<GroupData> getList() {
+        openGroupsPage();
         var groups = new ArrayList<GroupData>();
         var spans = manager.driver.findElements(By.cssSelector("span.group"));
         for (var span : spans) {
