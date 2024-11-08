@@ -8,6 +8,7 @@ import java.util.List;
 public class ContactHelper extends HelperBase {
 
     public ContactHelper(ApplicationManager manager) {
+
         super(manager);
     }
 
@@ -33,9 +34,9 @@ public class ContactHelper extends HelperBase {
         returnToContactsPage();
     }
 
-    public void modifyContact(ContactData modifiedContact) {
+    public void modifyContact(ContactData contact, ContactData modifiedContact) {
         openContactsPage();
-        selectInitContactModification();
+        selectInitContactModification();;
         fillContactForm(modifiedContact);
         submitContactModification();
         returnToContactsPage();
@@ -101,9 +102,10 @@ public class ContactHelper extends HelperBase {
                 "tr[name=\"entry\"]:not(.odd)"));
         for (var td : tds) {
             var name = td.getText();
+            var last_name = td.getTagName();
             var checkbox = td.findElement(By.name("selected[]"));
             var id = checkbox.getAttribute("value");
-            contacts.add(new ContactData().withId(id).withName(name));
+            contacts.add(new ContactData().withId(id).withName(name).withLastName(last_name));
 
         }
 
