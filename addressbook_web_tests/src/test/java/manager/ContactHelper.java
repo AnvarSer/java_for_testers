@@ -97,7 +97,8 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> getList() {
         var contacts = new ArrayList<ContactData>();
-        var tds = manager.driver.findElements(By.cssSelector("input[type=\"checkbox\"]"));
+        var tds = manager.driver.findElements(By.cssSelector("tr.odd[name=\"entry\"],\n" +
+                "tr[name=\"entry\"]:not(.odd)"));
         for (var td : tds) {
             var name = td.getText();
             var checkbox = td.findElement(By.name("selected[]"));
