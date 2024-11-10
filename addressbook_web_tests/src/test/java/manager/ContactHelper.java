@@ -106,7 +106,7 @@ public class ContactHelper extends HelperBase {
             var last_name = td.getTagName();
             var checkbox = td.findElement(By.name("selected[]"));
             var id = checkbox.getAttribute("value");
-            contacts.add(new ContactData().withId(id).withName(name).withLastName(last_name));
+            contacts.add(new ContactData().withName(name).withLastName(last_name));
 
         }
 

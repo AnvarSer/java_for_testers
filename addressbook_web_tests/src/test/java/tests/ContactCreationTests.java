@@ -50,7 +50,10 @@ public class ContactCreationTests extends TestBase {
         // Comparator to sort contacts by first name and last name in alphabetical order
         Comparator<ContactData> compareByNameAndLastName = (o1, o2) -> {
             int nameCompare = o1.name().compareTo(o2.name());
-            return (nameCompare != 0) ? nameCompare : o1.last_name().compareTo(o2.last_name());
+            if (nameCompare != 0) {
+                return nameCompare;
+            }
+            return o1.last_name().compareTo(o2.last_name());
         };
 
         // Sort the updated list of contacts by first name and last name
