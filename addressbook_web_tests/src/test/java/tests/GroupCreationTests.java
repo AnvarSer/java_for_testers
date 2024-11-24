@@ -8,13 +8,17 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class GroupCreationTests  extends TestBase {
+public class GroupCreationTests extends TestBase {
 
     public static List<GroupData> groupProvider() throws IOException {
         var result = new ArrayList<GroupData>();
@@ -25,8 +29,25 @@ public class GroupCreationTests  extends TestBase {
 //                }
 //            }
 //        }
+
+        // The below part of code is to read the file line by line
+        var json = "";
+        try (var reader = new FileReader("groups.json") ;
+        var breader = new BufferedReader(reader)
+                ) {
+            var line = breader.readLine();
+            while (line != null) {
+                json = json + line;
+                line = breader.readLine();
+            }
+        }
+
+
+        // The below line is to read the file in whole
+//        var json = Files.readString(Paths.get("groups.json"));
         ObjectMapper mapper = new ObjectMapper();
-        var value = mapper.readValue(new File("groups.json"), new TypeReference<List<GroupData>>(){});
+        var value = mapper.readValue(json, new TypeReference<List<GroupData>>() {
+        });
         result.addAll(value);
         return result;
     }
@@ -48,7 +69,7 @@ public class GroupCreationTests  extends TestBase {
 
     }
 
-    public static List<GroupData> negativeGroupProvider(){
+    public static List<GroupData> negativeGroupProvider() {
         var result = new ArrayList<GroupData>(List.of(
                 new GroupData("", "group name'", "", "")));
         return result;
